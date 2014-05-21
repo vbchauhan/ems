@@ -21,7 +21,7 @@ if(isset($_POST["email"])){
 if(isset($_POST["pno"])){
 	$pno=$_POST["pno"];}else{echo "pno is not Set <br />";}
 if(isset($_POST["alephid"])){
-	$alephid=$_POST["alephid"];}else{echo "User ID is not Set <br />";}
+	$alephid=ltrim($_POST["alephid"],'0');}else{echo "User ID is not Set <br />";}
 	
 if(isset($_POST["utype"])){
 	$utype=$_POST["utype"];}else{echo "utype is not Set <br />";}

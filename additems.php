@@ -25,8 +25,8 @@ function submititem(param)
 		url: 'update.php',
 		data: {updatetype : updatetype,Description:$("#description").val(),Serial_number:$("#serial").val(),Barcode:$("#barcode").val(),Item_Type_ID:$("#typedesc").val()},
 		success:function(data){
-			alert(data);
 			location.reload();
+			alert(data);
 		},
 	});
 }
@@ -58,9 +58,9 @@ function addItemInformation()
 	$("#additem").html("");
 	$("#additem").append( '<form onSubmit = "submititem(2)"> '+
 			'<label>Barcode</label>'+
-			'<input type = "text" id = "barcode" /><br>'+
-			'<label>Serial Number</label><input type = "text" id = "serial" length = 20/><br>'+
-			'<label>Description</label><input type = "text" id = "description" /><br>'+
+			'<input type = "number" id = "barcode" required/><br>'+
+			'<label>Serial Number</label><input type = "number" id = "serial" length = 20 required/><br>'+
+			'<label>Description</label><input type = "text" id = "description" required/><br>'+
 			'<label>Item Type</label><select id = "typedesc"></select><br>'+
 			'<input type = "submit" value = "Submit" />'+
 			'</form>'
@@ -80,7 +80,7 @@ function addItemInformation()
 		width:800,
 		height:400,
 		buttons: {
-		Ok: function() {
+		Close: function() {
 		$(this).dialog('close');
 		} //end OK button
 		}//end buttons
@@ -98,7 +98,7 @@ function editInformation(barcode,serial,description,type)
 	$("#additem").append( '<form onSubmit = "submititem(1)"> '+
 			'<label>Barcode</label>'+
 			'<input type = "text" id = "barcode" value = '+barcode+' readonly/><br>'+
-			'<label>Serial Number</label><input type = "text" id = "serial" value = '+serial+' length = 20/><br>'+
+			'<label>Serial Number</label><input type = "number" id = "serial" value = '+serial+' length = 20/><br>'+
 			'<label>Description</label><input type = "text" id = "description" value = "'+description+'" /><br>'+
 			'<label>Item Type</label><select id = "typedesc"></select><br>'+
 			'<input type = "submit" value = "Submit" />'+
@@ -119,7 +119,7 @@ function editInformation(barcode,serial,description,type)
 		width:800,
 		height:400,
 		buttons: {
-		Ok: function() {
+		Close: function() {
 		$(this).dialog('close');
 		location.reload();
 		} //end OK button

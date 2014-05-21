@@ -141,7 +141,7 @@ if($userRow['Aleph_ID'] != '')
 
 	$bg = ($bg=='#eeeeee' ? '#ffffff' : '#eeeeee'); // Switch the background color.
 	echo '<tr bgcolor="' . $bg . '" class = "tablecontent">
-		<td align="left">' . $userRow['Aleph_ID'] . '</td>
+		<td align="left">' . str_pad($userRow['Aleph_ID'],12,'0',STR_PAD_LEFT) . '</td>
 		<td align="left">' . $userRow['First_Name'] . '</td>
 		<td align="left">' . $userRow['Last_Name'] . '</td>
 		<td align="left">' . $userRow['Barcode_ID'] . '</td>

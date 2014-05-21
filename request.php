@@ -192,7 +192,7 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				$result = mysql_query ($query);
 				while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
 				{
-				echo '<option value="'.$row['department_name'].'" selected="selected">'.$row['department_name'].'</option>';
+				echo '<option value="'.$row['department_name'].'" >'.$row['department_name'].'</option>';
 				}
 				?>
 				</select>

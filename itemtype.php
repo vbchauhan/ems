@@ -54,7 +54,7 @@ function additemtypeInformation()
 	$("#additemtype").html("");
 	$("#additemtype").append( '<form onSubmit = "submititemtype(2)"> '+
 			'<label style = "width:30%">Item Description</label>'+
-			'<input type = "text" id = "description" style = "width:50%"/><br>'+
+			'<input type = "text" id = "description" style = "width:50%" required/><br>'+
 			'<input type = "submit" value = "Submit" />'+
 			'</form>'
 			);
@@ -67,7 +67,7 @@ function additemtypeInformation()
 		width:800,
 		height:400,
 		buttons: {
-		Ok: function() {
+		Close: function() {
 		$(this).dialog('close');
 		} //end OK button
 		}//end buttons
@@ -98,7 +98,7 @@ function editInformation(itemtypeid,department)
 		width:800,
 		height:400,
 		buttons: {
-		Ok: function() {
+		Close: function() {
 		$(this).dialog('close');
 		location.reload();
 		} //end OK button

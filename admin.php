@@ -64,6 +64,14 @@ top();
               	This section manages Institutions<BR><BR>
             </td>
 		</tr>
+		<tr>
+			<td align="center" CLASS="tablebody">
+				<FORM NAME="form3" METHOD="post" ACTION="adduser.php">
+	   	    &nbsp;<INPUT TYPE="submit" NAME="Submit" VALUE="MANAGE USERS">
+				</FORM>
+              	This section manages Users<BR><BR>
+            </td>
+		</tr>
 </table>
 </div>
 <?PHP 

@@ -54,7 +54,7 @@ function addinstitutionInformation()
 	$("#addinstitution").html("");
 	$("#addinstitution").append( '<form onSubmit = "submitinstitution(2)"> '+
 			'<label style = "width:30%">Institution Name</label>'+
-			'<input type = "text" id = "institution" style = "width:50%"/><br>'+
+			'<input type = "text" id = "institution" style = "width:50%" required/><br>'+
 			'<input type = "submit" value = "Submit" />'+
 			'</form>'
 			);
@@ -67,7 +67,7 @@ function addinstitutionInformation()
 		width:800,
 		height:400,
 		buttons: {
-		Ok: function() {
+		Close: function() {
 		$(this).dialog('close');
 		} //end OK button
 		}//end buttons
@@ -98,7 +98,7 @@ function editInformation(institutionid,institution)
 		width:800,
 		height:400,
 		buttons: {
-		Ok: function() {
+		Close: function() {
 		$(this).dialog('close');
 		location.reload();
 		} //end OK button

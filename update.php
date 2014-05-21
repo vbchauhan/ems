@@ -152,4 +152,40 @@ elseif ($_GET['updatetype']=='delusertype')
 		echo 'Record could not be deleted';
 }
 
+if($_GET['updatetype'] == 'updateuser')
+{
+	if (md5($_GET['oldpassword'])==$_GET['password'])
+	{
+		$query = "Update login SET password ='".md5($_GET['newpassword'])."' where username ='".$_GET['username']."'";
+		$result = mysql_query($query);
+		if($result)
+			echo 'Record update successfully';
+		else
+			echo 'Record could not be updated';
+	}
+	else{
+		echo 'Incorrect old password';
+	}
+
+}
+else if($_GET['updatetype'] == 'adduser')
+{
+	$query = "Insert into login (username,password,Users_ID) values ('".$_GET['username']."','".md5($_GET['newpassword'])."',501)";
+	$result = mysql_query($query);
+	if($result)
+		echo 'Record added successfully';
+	else
+		echo 'Record could not be added';
+
+}
+elseif ($_GET['updatetype']=='deluser')
+{
+	$query ="Delete from login where username ='".$_GET['username']."'";
+	$result = mysql_query($query);
+	if($result)
+		echo 'Record deleted successfully';
+	else
+		echo 'Record could not be deleted';
+}
+
 ?>

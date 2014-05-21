@@ -2,9 +2,9 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/<?php echo strtolower($_SESSION["SystemNameStr"]);?>/css/main.css" rel="stylesheet" media="screen">
+<link href="/ems/css/main.css" rel="stylesheet" media="screen">
 <title>Priddy Loan System</title>
-<link rel="shortcut icon" href="/<?php echo strtolower($_SESSION["SystemNameStr"]);?>/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/ems/favicon.ico" type="image/x-icon">
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <?php
 include ("global.php");

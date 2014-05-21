@@ -33,7 +33,7 @@ if ($action=='submitpw')
 		{
 		$CheckRow = @mysql_fetch_array($CheckResult);
 			{
-			if (($fpw)==$CheckRow["password"])
+			if ((md5($fpw))==$CheckRow["password"])
 				{
 				$_SESSION["AUTH_USER"]= true;
 				//$_SESSION['AUTH_USER_NAME']=$CheckRow["First_Name"].' '.$CheckRow["Last_Name"];
