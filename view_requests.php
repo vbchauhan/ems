@@ -38,6 +38,39 @@ $id=$_GET["id"];
 <link href="/<?php echo strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
 <link rel="shortcut icon" href="/<?php echo strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+    var $cells = $("td");
+
+    $("#requestsearch").keyup(function() {
+        var val = $.trim(this.value).toUpperCase();
+        if (val === "")
+            $cells.parent().show();
+        else {
+            $cells.parent().hide();
+            $cells.filter(function() {
+                return -1 != $(this).text().toUpperCase().indexOf(val);
+            }).parent().show();
+        }
+    });
+});
+$('th').click(function(){
+    var table = $(this).parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+    this.asc = !this.asc
+    if (!this.asc){rows = rows.reverse()}
+    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+})
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
+    }
+}
+function getCellValue(row, index){ return $(row).children('td').eq(index).html() }
+</script>
 </head>
 <div id="banner" "style:width="90%"";>EQUIPMENT MANAGEMENT SYSTEM</div>
 	<div id="topnavi">
@@ -57,10 +90,19 @@ $id=$_GET["id"];
 						}?>
 	</div>	
 </div>	
+
 <?php
 
 $image=$_SESSION["SystemNameStr"]."/css/images/delete-icon.png";
-echo "<H1> iPad Requests sorted as per $sort $order</H1>"; 
+?>
+<div>
+	<H1> iPad Requests </H1>
+	<div style = "float:right">
+	<label>Search</label>
+	<input type = "search" id = "requestsearch" />
+	</div><br><br>
+</div>
+<?php 
 $data = download_aleph_data();
 //echo $data[0]['Title'];
 $sql = array();
@@ -73,46 +115,27 @@ $abc = mysql_query('INSERT INTO aleph_data (Title, Barcode,Callno,IS_no,Last_ret
 $query = "SELECT Request_ID,No_of_items,Request_Date,Users_ID,Item_Type_ID FROM request order by $sort $order ";
 $result = mysql_query($query); // Run the query.
 echo '<table cellpadding="0" cellspacing="0" class="db-table"> <tr>';
-if ($order=="asc"){
-echo '<table align="center" cellspacing="0" cellpadding="5">
+
+echo '<table id = "requestdata" align="center" cellspacing="0" cellpadding="5">
 <tr class = "BackgroundColorChange">
-	<td align="left"><a href="" class = "Textwhite"><b>User ID</b></a></td>				
-	<td align="left"><a href="view_requests.php?sort=First_Name&order=desc" class = "Textwhite"><b>First Name</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=lname&order=desc" class = "Textwhite"><b>Last Name</a></b></a></td>
-	<td align="left"><a href="view_requests.php?sort=barcode&order=desc" class = "Textwhite"><b>Barcode</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=email&order=desc" class = "Textwhite"><b>Email</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=pno&order=desc" class = "Textwhite"><b>Phone</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=utype&order=desc" class = "Textwhite"><b>User Type</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=institution&order=desc" class = "Textwhite"><b>Institutions</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=department&order=desc" class = "Textwhite"><b>Department</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=request_date&order=desc" class = "Textwhite"><b>Request Date</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=ipads&order=desc" class = "Textwhite"><b>Item Type Requested</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=ipads&order=desc" class = "Textwhite"><b>No Of Items</b></a></td>
-	<!--<td align="left"><b>Status</b></td>-->
-	<td align="left"><b>Action</b></td>
+	<th align="left"><a href="" class = "Textwhite"><b>User ID</b></a></th>				
+	<th align="left"><a href="" class = "Textwhite"><b>First Name</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Last Name</a></b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Barcode</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Email</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Phone</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>User Type</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Institutions</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Department</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Request Date</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Item Type Requested</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>No Of Items</b></a></th>
+	<!--<th align="left"><b>Status</b></th>-->
+	<th align="left"><b>Action</b></th>
 	
 </tr>';
-}
-else{
-echo '<table align="center" style = "background-color :#564b47; color : white" cellspacing="0" cellpadding="5">
-<tr class = "BackgroundColorChange">
-	<td align="left"><a href="" class = "Textwhite"><b>User ID</b></a></td>	
-	<td align="left"><a href="view_requests.php?sort=First_Name&order=asc" class = "Textwhite"><b>First Name</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=lname&order=asc" class = "Textwhite"><b>Last Name</a></b></a></td>
-	<td align="left"><a href="view_requests.php?sort=barcode&order=asc" class = "Textwhite"><b>Barcode</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=email&order=asc" class = "Textwhite"><b>Email</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=pno&order=asc" class = "Textwhite"><b>Phone</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=utype&order=asc" class = "Textwhite"><b>User Type</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=institution&order=asc" class = "Textwhite"><b>Institutions</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=department&order=asc" class = "Textwhite"><b>Department</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=request_date&order=asc" class = "Textwhite"><b>Request Date</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=ipads&order=asc" class = "Textwhite"><b>Item Type Requested</b></a></td>
-	<td align="left"><a href="view_requests.php?sort=ipads&order=asc" class = "Textwhite"><b>No Of Items</b></a></td>	
-	<!--<td align="left"><b>Status</b></td>-->
-	<td align="left"><b>Action</b></td>
-	
-</tr>';
-}
+
+
 
 // Fetch and print all the records.
 $bg = '#eeeeee'; // Set the background color.
@@ -153,7 +176,7 @@ if($userRow['Aleph_ID'] != '')
 		<td align="left">' . $row['Request_Date']. '</td>
 		<td align="left">' . get_item_type_desc($row['Item_Type_ID']) . '</td>
 		<td align="left">' . $row['No_of_items'] . '</td>
-		<td align="left"><a href="editRequest.php?id=' . $row['Request_ID'] . '" target="_blank"> <img src="images/edit-icon.png" width="28" height="28"></a></td>
+		<td align="left"><a href="editRequest.php?id=' . $row['Request_ID'] . '" > <img src="images/edit-icon.png" width="28" height="28"></a></td>
 		<!--<td align="left"><a href="test.php" onclick = "compareitems()">Reserve</a></td>-->
 		<td align="left"><a href="view_requests.php?id=' . $row['Request_ID'] . '&cancel=1" onclick="confirmdelete()"><img src="images/delete-icon.png" width="28" height="28"></a></td>
 		</tr>

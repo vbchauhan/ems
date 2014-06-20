@@ -5,7 +5,7 @@ include ("global.php");
 include ("layout.php");
 include ("functions.php");
 include('phpMyGraph.php');
-echo $_SESSION["AUTH_USER"];
+//echo $_SESSION["AUTH_USER"];
 //if (@$_SESSION["AUTH_USER"]==true){
 top(); 
 ?>

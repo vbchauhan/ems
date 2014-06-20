@@ -144,6 +144,9 @@ $nums = mysql_num_rows($result);
 <br><br>
 	<div align="center">
 		<table width="500" border="0" align="center">
+		<tr>
+			<td align = "right"><input type = "button" onClick = "addItemInformation()" value ="Add New item"></td>
+		</tr>
 		<TR>
 			<TD WIDTH="150" class="tableheading" NOWRAP ALIGN="left"><strong>&nbsp;Item Barcode&nbsp;</strong></TD>
 			<TD WIDTH="150" class="tableheading" ALIGN="left"><strong>&nbsp;Short Description&nbsp;</strong></TD>

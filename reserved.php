@@ -12,7 +12,21 @@ include ("functions.php");
 <link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
+$(document).ready(function() {
+    var $cells = $("td");
 
+    $("#requestsearch").keyup(function() {
+        var val = $.trim(this.value).toUpperCase();
+        if (val === "")
+            $cells.parent().show();
+        else {
+            $cells.parent().hide();
+            $cells.filter(function() {
+                return -1 != $(this).text().toUpperCase().indexOf(val);
+            }).parent().show();
+        }
+    });
+});
 
 function getDetails(data){
 
@@ -80,7 +94,14 @@ console.log(data);
 						}?>
 	</div>	
 </div>	
-<H1>  </H1>
+<div>
+	<H1> View Reservations </H1>
+	<div style = "float:right">
+	<label>Search</label>
+	<input type = "search" id = "requestsearch" />
+	</div><br><br>
+</div>
+
 <?php
 if ($_GET['refresh'] == 1)
 	refresh();
@@ -91,17 +112,17 @@ echo '<table cellpadding="0" cellspacing="0" class="db-table"> <tr>';
 
 echo '<table align="center" cellspacing="0" cellpadding="5">
 <tr class = "BackgroundColorChange">
-	<td align="left"><b>First Name</b></td>
-	<td align="left"><b>Last Name</a></b></td>
-	<td align="left"><b>Barcode</b></td>
-	<td align="left"><b>Email</b></td>
-	<td align="left"><b>Phone</b></td>
-	<td align="left"><b>User Type</b></td>
-	<td align="left"><b>Institutions</b></td>
-	<td align="left"><b>Department</b></td>
-	<td align="left"><b>Request Date</b></td>
-	<td align="left"><b>#iPad_Requested</b></td>
-	<td align="left"><b>Action</b></td>
+	<th align="left"><b>First Name</b></th>
+	<th align="left"><b>Last Name</a></b></th>
+	<th align="left"><b>Barcode</b></th>
+	<th align="left"><b>Email</b></th>
+	<th align="left"><b>Phone</b></th>
+	<th align="left"><b>User Type</b></th>
+	<th align="left"><b>Institutions</b></th>
+	<th align="left"><b>Department</b></th>
+	<th align="left"><b>Request Date</b></th>
+	<th align="left"><b>#iPad_Requested</b></th>
+	<th align="left"><b>Action</b></th>
 	
 </tr>';
 

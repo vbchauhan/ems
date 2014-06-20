@@ -123,6 +123,9 @@ $nums = mysql_num_rows($result);
 <br><br>
 	<div align="center">
 		<table width="500" border="0" align="center">
+		<tr>
+			<td align = "left"><input type = "button" onClick = "addprogramInformation()" value ="Add New Program/Department"></td>
+		</tr>
 		<TR>
 			<TD WIDTH="150" class="tableheading" NOWRAP ALIGN="left"><strong>&nbsp;PROGRAMS/DEPARTMENT&nbsp;</strong></TD>
 			<TD WIDTH="100" class="tableheading" ALIGN="center"><strong>&nbsp;EDIT&nbsp;</strong></TD>					
@@ -144,7 +147,7 @@ $nums = mysql_num_rows($result);
 			} 
 		?>
 		<tr>
-			<td align = "right"><input type = "button" onClick = "addprogramInformation()" value ="Add New Program/Department"></td>
+			<td align = "left"><input type = "button" onClick = "addprogramInformation()" value ="Add New Program/Department"></td>
 		</tr>
 		</table>
 	</div>

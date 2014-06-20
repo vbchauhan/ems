@@ -144,7 +144,7 @@ $nums = mysql_num_rows($result);
 			} 
 		?>
 		<tr>
-			<td align = "right"><input type = "button" onClick = "additemtypeInformation()" value ="Add New Item Type"></td>
+			<td align = "left"><input type = "button" onClick = "additemtypeInformation()" value ="Add New Item Type"></td>
 		</tr>
 		</table>
 	</div>

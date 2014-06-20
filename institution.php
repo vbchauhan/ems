@@ -144,7 +144,7 @@ $nums = mysql_num_rows($result);
 			} 
 		?>
 		<tr>
-			<td align = "right"><input type = "button" onClick = "addinstitutionInformation()" value ="Add New Institution"></td>
+			<td align = "left"><input type = "button" onClick = "addinstitutionInformation()" value ="Add New Institution"></td>
 		</tr>
 		</table>
 	</div>
