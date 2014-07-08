@@ -577,7 +577,12 @@ function setPostData($var)
 	$_SESSION['data'] = $var;
 
 }
-
+function check_user_id($user_id){
+	if ($user_id == "")
+		return "";
+	else 
+		return str_pad($user_id,12,'0',STR_PAD_LEFT);
+}
 function refresh(){
 	$data = download_aleph_data();
 	//echo $data[0]['Title'];

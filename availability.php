@@ -37,6 +37,7 @@ echo '<table align="center" cellspacing="0" cellpadding="5">
 	<td align="left"><b>Total</b></a></td>
 	<td align="left"><b>Earliest Due</b></a></td></tr>';
 
+// Get information using the webservice call
 $data = download_availableitems_data();
 
 foreach($data as $datarow) {

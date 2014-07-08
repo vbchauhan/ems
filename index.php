@@ -43,7 +43,7 @@ if (@$_SESSION["AUTH_USER"]==true)
 	<td align="left"><b>Start</b></a></td>
 	<td align="left"><b>End</b></a></td>	
 	<td align="left"><b>Institution</b></a></td></tr>';
-	
+// Get the data into database using the web service call	
 	$data = download_aleph_data();
 	foreach($data as $datarow) {
 		if($datarow['Title'] == "Shady Grove Library iPad")

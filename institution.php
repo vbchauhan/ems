@@ -13,7 +13,7 @@ top();
 <link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
-
+// Update database with the institution information
 function submitinstitution(param)
 {
 	var updatetype;
@@ -30,7 +30,7 @@ function submitinstitution(param)
 		},
 	});
 }
-
+// Delete institution information from database
 function deleteinstitution(data)
 {
 	var isOk = window.confirm("Are you sure?");
@@ -47,7 +47,7 @@ function deleteinstitution(data)
 	});
 	}
 }
-
+// Add institution information in the pop up box
 function addinstitutionInformation()
 {
 	
@@ -75,7 +75,7 @@ function addinstitutionInformation()
 		});//end dialog
 	
 }
-
+// Edit institutional information
 function editInformation(institutionid,institution)
 {
 	//alert('Hi');

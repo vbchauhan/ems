@@ -13,12 +13,9 @@ top();
 <link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
-
+// Submit user information and store it in database
 function submituser(param)
 {
-	
-
-	
 	if (param==1 && $("#newpassword").val()==$("#confirmnewpassword").val())
 		{
 			$.ajax({
@@ -47,7 +44,7 @@ function submituser(param)
 		alert("New Password and Confirm Password does not match.");
 	}
 }
-
+// Delete user information from database
 function deleteuser(data)
 {
 	var isOk = window.confirm("Are you sure?");
@@ -67,7 +64,7 @@ function deleteuser(data)
 		alert("Cannot delete the user " + data +". Atleast one user is required.");
 	}
 }
-
+// Add new user information in the dialog box
 function addUserInformation()
 {
 	
@@ -99,7 +96,7 @@ function addUserInformation()
 		});//end dialog
 	
 }
-
+// Edit current user information
 function editInformation(username,password)
 {
 

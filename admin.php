@@ -7,6 +7,7 @@ top();
 ?>
 <H1><strong>SYSTEM ADMIN PAGE</strong></H1>
 <BR>
+<!-- Add Information in database -->
 <div align="center">
 <table width="350" border="0">
 	<!--  	<tr>

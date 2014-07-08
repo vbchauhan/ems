@@ -19,6 +19,7 @@ top();
 <script language="javascript" type="text/javascript">
 
 function draw_graph(){
+// Call appropriate pages depending on the type of information selected
 //	window.open("test.php");
     $.ajax({
         url: 'test.php',

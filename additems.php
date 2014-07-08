@@ -13,7 +13,7 @@ top();
 <link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
-
+// Submit the item and store the information in database
 function submititem(param)
 {
 	var updatetype;
@@ -30,7 +30,7 @@ function submititem(param)
 		},
 	});
 }
-
+// Delete Item from database
 function deleteitem(data)
 {
 
@@ -38,7 +38,7 @@ function deleteitem(data)
 
 	if(isOk) {
 	       
-	
+// Ajax call with the data information to be deleted	
 	$.ajax({
 		url :'update.php',
 		
@@ -51,7 +51,7 @@ function deleteitem(data)
 	});
 	}
 }
-
+// Add new item dialog box
 function addItemInformation()
 {
 	
@@ -88,7 +88,7 @@ function addItemInformation()
 		});//end dialog
 	
 }
-
+// Edit information for the existing items
 function editInformation(barcode,serial,description,type)
 {
 	
@@ -139,6 +139,7 @@ function editInformation(barcode,serial,description,type)
 <?php 
 $query = "Select * from Items";
 $result = mysql_query($query);
+// Populate the item information
 $nums = mysql_num_rows($result);
 ?>
 <br><br>
