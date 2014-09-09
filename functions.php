@@ -423,61 +423,14 @@ function get_status_desc($InputStr)
 			return "";
 	} // End get_status_desc	
 // end of file functions.php
-function get_data_from_aleph()
-{
-	$file = new SimpleXMLElement(file_get_contents("http://catalog.umd.edu/cgi-bin/cpsgequip"));
-	//echo $file->table;
-	$items = $file ->body -> table[0]->tr;
-	$summary = $file -> body -> table[1]->tr;
-	
-	for ($i = 0; ;$i++)
-	{
-		if($items[0]->th[$i] != "")
-		{
-			$header[0][$i] = $items[0]->th[$i];
-		}
-		else 
-			break;
-		
-	}
-	//echo sizeof($items[1]->td);
-	for ($i = 1; $i<sizeof($items) ;$i++)
-	{
-		for ($j = 0; $j<sizeof($items[$i]->td);$j++)
-		{
-			$line_items[$i - 1][$j] = $items[$i]->td[$j];
-		}	
 
-	}
-	for ($i = 0; ;$i++)
-	{
-		if($summary[0]->th[$i] != "")
-		{
-			$header[1][$i] = $summary[0]->th[$i];
-		}
-		else
-			break;
-	
-	}
-	for ($i = 1; $i<sizeof($summary) ;$i++)
-	{
-		for ($j = 0; $j<sizeof($summary[$i]->td);$j++)
-		{
-			$item_summary[$i - 1][$j] = $summary[$i]->td[$j];
-		}
-	}
-	$returnedarray = [$header, $line_items, $item_summary];
-	$GLOBALS['filedata'] = $returnedarray;
-	return $returnedarray;
-
-}
 function download_aleph_data()
 {
 	$file = new SimpleXMLElement(file_get_contents("http://catalog.umd.edu/cgi-bin/cpsgequip"));
 	//echo $file->table;
 	$items = $file ->body -> table[0]->tr;
 	$summary = $file -> body -> table[1]->tr;
-	$file = fopen("test.txt","w");
+	//$file = fopen("test.txt","w");
 	$data = array();
 	$line = '';
 	for ($i = 0; ;$i++)
@@ -496,7 +449,7 @@ function download_aleph_data()
 		for ($j = 0; $j<sizeof($items[$i]);$j++)
 		{
 			$line_items[$i - 1][$j] = $items[$i]->td[$j];
-			fwrite($file, $line_items[$i - 1][$j].",");
+			//fwrite($file, $line_items[$i - 1][$j].",");
 			
 		}
 		$line['Title'] = $items[$i]->td[0];
@@ -511,7 +464,7 @@ function download_aleph_data()
 		$line['Institution'] = $items[$i]->td[9];
 		$line['Bk-start'] = $items[$i]->td[10];
 		$line['Bk-end'] = $items[$i]->td[11];
-		fwrite($file,"\n");
+		//fwrite($file,"\n");
 		array_push($data,$line);
 		$line = '';
 	}
@@ -535,7 +488,7 @@ function download_aleph_data()
 	}
 	//for ($i= 0;;$i++)
 
-	fclose($file);
+	//fclose($file);
 	return $data;
 	//echo "Data Written to file";
 }
@@ -563,10 +516,14 @@ function download_availableitems_data()
 }
 function validate_date($date)
 {
-	if ($date == "1970-01-01")
+	$phpdate = strtotime($date);
+	$mysqldate = date('Y-m-d',$phpdate);
+	if ($mysqldate == "1970-01-01" || $mysqldate == "1969-12-31")
 		return "-";
-	else 
-		return $date;
+	else
+		return $mysqldate;
+	 
+		
 }
 function compareitems()
 {
@@ -605,7 +562,9 @@ function refresh(){
 		if($userRow['Aleph_ID'] != '')
 		{
 			$alephResult = mysql_query('Select * from aleph_data where Aleph_ID ="'.$userRow['Aleph_ID'].'"');
-			$alephRow = mysql_fetch_array($alephResult, MYSQL_ASSOC);
+			while ($alephRow = mysql_fetch_array($alephResult, MYSQL_ASSOC))
+			{
+				echo print_r($alephRow);
 			if ($alephRow['Aleph_ID'] && $row['Request_Date'] == $alephRow['Loan'])
 			{
 				$query_item = "SELECT * FROM items where barcode =".$alephRow['Barcode'];
@@ -617,6 +576,7 @@ function refresh(){
 			}
 			//else
 			//echo "Error";
+			}
 		}
 	}
 }

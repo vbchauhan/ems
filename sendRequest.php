@@ -1,6 +1,6 @@
 <head>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 </head>
 <?php
@@ -22,12 +22,12 @@ if(isset($_POST["pno"])){
 	$pno=$_POST["pno"];}else{echo "pno is not Set <br />";}
 	
 if(isset($_POST["utype"])){
-	$utype=$_POST["utype"];}else{echo "utype is not Set <br />";}
+	$utype=get_user_type_id($_POST["utype"]);}else{echo "utype is not Set <br />";}
 	
 if(isset($_POST["institution"])){
-	$institution=$_POST["institution"];}else{echo "institution is not Set <br />";}
+	$institution=get_institution_id($_POST["institution"]);}else{echo "institution is not Set <br />";}
 if(isset($_POST["programname"])){
-	$department=$_POST["programname"];}else{echo "Program is not Set <br />";}
+	$department = get_programs_id($_POST["programname"]);}else{echo "Program is not Set <br />";}
 if(isset($_POST["request_date"])){
 	$request_date=$_POST["request_date"];}else{echo "Request Date is not Set <br />";}
 if(isset($_POST["itemtype"])){
@@ -46,8 +46,11 @@ if($userNum >= 1)
 {
 	$userRow = mysql_fetch_array($userResult, MYSQL_ASSOC);
 	$user_id = $userRow['users_id'];	
+// Update user information
 
+	$update_user_query = "Update users set First_Name = '".$fname."',Last_Name= '".$lname."',Phone_Number= '".$pno."',Email= '".$email."',Barcode_ID= ".$barcode.",Type_ID= ".$utype.",Programs_Department_ID= '".$department."',Institutions_ID= '".$institution."' where users_id = '".$user_id."'";
 
+	$update_user = mysql_query($update_user_query);
 	
 }
 else 
@@ -58,10 +61,11 @@ $user_type = get_user_type_id($utype);
 $inst = get_institution_id($institution);
 $program = get_programs_id($department);
 //echo $program;
-$add_user_query=" INSERT INTO Users
+$add_user_query =" INSERT INTO users
 (First_Name,Last_Name,Phone_Number,Email,Barcode_ID,Type_ID,Programs_Department_ID,Institutions_ID)
 VALUES
-('$fname','$lname','$pno','$email','$barcode','$user_type','$program','$inst')";
+('$fname','$lname','$pno','$email',$barcode,$utype,$department,$institution)";
+
 
 $add_user=mysql_query($add_user_query);
 
@@ -99,6 +103,9 @@ VALUES
 
 
 $confirm=mysql_query($sql);
+$request_id = mysql_insert_id();
+
+
 
 
 //This code will print the confirmation that the player has been registered in the database.
@@ -109,38 +116,39 @@ if (!$confirm)
 else 
 	{
 	echo '<h1>Your request has been successfully sent to the Library Staff.</h1><br><br>
-	You will receive an email a week before your iPad is available
+	You will receive an email when your iPad is available
 	
 	Thank you for using the iPad request System';
 	
 	$to = $email;
-	$subject = 'Priddy Reserves - Book Request Details';
-	
-	$body = 'Dear Patron '.$fname.' '.$lname.',
+	$subject = 'Priddy Circ - Equipment Request Details';
+	 
+	$body = 'Dear '.$fname.' '.$lname.',
 	
 	Thank you for making a request for the Equipment. Your Details are as follows:
 		
-	Request # : '.$mysql_insert_id().'
+	Request # : '.$request_id.'
 	Equipment : '.$itemtype.'
 	No of Equipment : '.$items.'
 	Barcode : '.$barcode.'
 		
 	Thank You, 
-	Priddy Reserves
+	Priddy Library
 
 	NOTE: This is an auto-generated email. Please contact Madhu Singh at madhus@umd.edu for any further assistance. You might be requested to provide your Request # for faster processing of your queries.';
 	
-	$from = 'From: Priddy Reserves';
+	$from = 'From: Priddy Circ';
 	mail($to, $subject, $body, $from);
+	
 	
 	// Emailing Request Information to Madhu
 	$to = 'madhus@umd.edu,priddyreserves@umd.edu,vchauhan@umd.edu';
-	$subject = 'New Book Request';
+	$subject = 'New iPad Request';
 	$body = '
-	A new Equipment Request has been made by '.$fname.' '.$lname.'[Email: '.$email.'] via the Priddy Reserves System. The request details are as follows:
+	A new Equipment Request has been made by '.$fname.' '.$lname.'[Email: '.$email.'] via the Equipment Management System. The request details are as follows:
 		
 		
-	Request # : '.$mysql_insert_id().'
+	Request # : '.$request_id.'
 	Equipment : '.$itemtype.'
 	No of Equipment : '.$items.'
 	Barcode : '.$barcode.'

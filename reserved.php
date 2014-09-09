@@ -3,13 +3,14 @@
 include ("global.php");
 include ("layout.php");
 include ("functions.php");
+
 ?>
 <head>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
 $(document).ready(function() {
@@ -30,10 +31,13 @@ $(document).ready(function() {
 
 function getDetails(data){
 
+	console.log(data);
 var rowData = data.split('||');
+console.log(rowData);
                            	
 $("#datatable").append("<tr class = 'BackgroundColorChange'><th>Description</th><th>Barcode</th><th>Loan Date</th><th>Return Date</th><th>Due Date</th><th>Request Date</th></tr>");                            
 var bg = '#ffffff';
+
 for(var i =0;i<rowData.length;i++)
 	{
 		if(rowData[i])
@@ -43,6 +47,7 @@ for(var i =0;i<rowData.length;i++)
 			bg = '#ffffff';
 		else
 			bg = '#eeeeee';
+
 		$("#datatable").append(
 		 "<tr bgcolor='"+ bg+"' class = 'tablecontent' style = 'color:black'>"+
 		 "<td align='left'>"+splitRow[0]+"</td>"+
@@ -75,8 +80,8 @@ console.log(data);
 </script>
 </head>
 
-<body>
-<div id="banner" "style:width="90%"";>EQUIPMENT MANAGEMENT SYSTEM</div>
+<body style = "margin-left:10px;margin-right:10px">
+<div id="banner" style="width:90%;margin-left:0px">EQUIPMENT MANAGEMENT SYSTEM</div>
 	<div id="topnavi">
 	<div id="topnavi">
 			<a href="/<?php echo strtolower($_SESSION["SystemNameStr"])?>"<?php if ($CurrentRequestURLarr[2]=="") print ' class="selected"'?>>Home</a>
@@ -130,7 +135,7 @@ echo '<table align="center" cellspacing="0" cellpadding="5">
 $bg = '#eeeeee'; // Set the background color.
 while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 
-	$queryUser = "Select * from Users where Users_ID =".$row['Users_ID'];
+	$queryUser = "Select * from users where Users_ID ='".$row['Users_ID']."'";
 	$userResult = mysql_query($queryUser);
 	$userRow = mysql_fetch_array($userResult, MYSQL_ASSOC);
 	$bg = ($bg=='#eeeeee' ? '#ffffff' : '#eeeeee'); // Switch the background color.
@@ -160,15 +165,16 @@ if(isset($_GET["id"])){
 	}
 if(isset($_GET["data"]))
 	{
-		$data = "";
+		$data = '';
 		$result = mysql_query("Select * from loans where Request_ID = ".$_GET["data"]);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 		
-		$itemQuery = "Select * from Items where Items_ID = ".$row['Items_ID'];
+		$itemQuery = "Select * from items where Items_ID = ".$row['Items_ID'];
 		$itemResult = mysql_query($itemQuery);
 		$itemRow = mysql_fetch_array($itemResult, MYSQL_ASSOC);
-		$data = '"'.$data.$itemRow['Description'].','.$itemRow['Barcode'].','.$row['Loan_Date'].','.$row['Return_Date'].','.$row['Due_Date'].','.$row['Request_accept_date'].'||"';
+		$data = $data.$itemRow['Description'].','.$itemRow['Barcode'].','.$row['Loan_Date'].','.$row['Return_Date'].','.$row['Due_Date'].','.$row['Request_accept_date'].'||';
 		}
+		echo $data;
 		echo '<script type="text/javascript">getDetails('.$data.');</script>';
 	}
 

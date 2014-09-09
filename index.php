@@ -42,7 +42,7 @@ if (@$_SESSION["AUTH_USER"]==true)
 	<td align="left"><b>User</b></a></td>
 	<td align="left"><b>Start</b></a></td>
 	<td align="left"><b>End</b></a></td>	
-	<td align="left"><b>Institution</b></a></td></tr>';
+	</tr>';
 // Get the data into database using the web service call	
 	$data = download_aleph_data();
 	foreach($data as $datarow) {
@@ -56,9 +56,9 @@ if (@$_SESSION["AUTH_USER"]==true)
 						<td align="left">'.validate_date($datarow['Loan']).'</td>
 						<td align="left">'.validate_date($datarow['Due']).'</td>
 						<td align="left">'.$datarow['User'].'</td>
-						<td align="left">'.$datarow['Bk-start'].'</td>
-						<td align="left">'.$datarow['Bk-end'].'</td>
-						<td align="left">'.$datarow['Institution'].'</td></tr>';
+						<td align="left">'.validate_date($datarow['Bk-start']).'</td>
+						<td align="left">'.validate_date($datarow['Bk-end']).'</td>
+						</tr>';
 		//		echo "Key: ".$key." Data: ".$data[1]."<br />";
 		}
 	}
@@ -84,7 +84,7 @@ else
 <H3>
 <BR>
 <BR>
-To use this system you will need to login, <a href="/<?=strtolower($_SESSION["SystemNameStr"])?>/login.php" target="_self">click here to login</a>.<b>(STAFF USE ONLY)</b><BR>
+To use this system you will need to login, <a href="login.php" target="_self">click here to login</a>.<b>(STAFF USE ONLY)</b><BR>
 <BR> 
 <?php 
 
@@ -96,7 +96,8 @@ To use this system you will need to login, <a href="/<?=strtolower($_SESSION["Sy
 ?>
 <BR>
 <!--Otherwise you can see the status of items the loan system by <a href="/equipment/view/index.php" target="_self">clicking here for view only access</a>.-->
-To request a Hold on the iPad, please submit a request by filling the form  <a href="/<?=strtolower($_SESSION["SystemNameStr"])?>/request.php" target="_self">Click here to access the Form</a>
+To request a Hold on the iPad, please submit a request by filling the form  <a href="request.php" target="_self">Click here to access the Form</a><br><br><br>
+To check the Availability of Equipments at the Library, <a href="availability.php" target="_self">Click here</a>
 </H3>
 </div>
 

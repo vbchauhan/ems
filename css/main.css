@@ -558,5 +558,12 @@ tr.tablecontent {
 	font-size:11px;
 }
 
-
+.required label {
+    font-weight: bold;
+}
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
+}
 

@@ -1,6 +1,6 @@
 <head>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 </head>
 <?php

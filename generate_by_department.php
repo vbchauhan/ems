@@ -13,7 +13,7 @@ include ("phpgraphlib.php");
 	$date2 = $_GET['date2'];
 	
     $data = array();
-    $dateQuery = "Select count(a.Department_Name)as total, a.Department_Name from Programs_Department as a ,Users as b ,Loans as c where c.Users_ID = b.Users_ID and b.Programs_Department_ID = a.Programs_Department_ID and c.Loan_Date between '".$date1."' and '".$date2."' group by a.Programs_Department_ID";
+    $dateQuery = "Select count(a.Department_Name)as total, a.Department_Name from programs_department as a ,users as b ,loans as c where c.Users_ID = b.Users_ID and b.Programs_Department_ID = a.Programs_Department_ID and c.Loan_Date between '".$date1."' and '".$date2."' group by a.Programs_Department_ID";
     //echo $dateQuery;
     $result = mysql_query($dateQuery); // Run the query.
     //echo print_r($result);

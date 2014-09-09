@@ -8,9 +8,9 @@ top();
 <head>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
 
@@ -25,7 +25,6 @@ function submitprogram(param)
 		url: 'update.php',
 		data: {updatetype : updatetype,Department_Name:$("#department").val(),Program_ID:$("#programid").val()},
 		success:function(data){
-			alert(data);
 			location.reload();
 		},
 	});
@@ -112,9 +111,8 @@ function editInformation(programid,department)
 </head>
 <body>
 
+<H1><strong>Add/Change Program/Department Information</strong></H1>
 
-
-<div id="banner" style="width:90%;float:left">Add/Change Program/Department Information</div>
 <?php 
 $query = "select * from programs_department order by department_name";
 $result = mysql_query($query);

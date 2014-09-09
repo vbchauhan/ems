@@ -12,10 +12,10 @@ $userResult = mysql_query ( $query_users ); // Run the query.
 $userRow = mysql_fetch_array ( $userResult, MYSQL_ASSOC );
 ?>
 <head>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css"
+<link href="css/main.css"
 	rel="stylesheet" media="screen">
 <link rel="shortcut icon"
-	href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico"
+	href="favicon.ico"
 	type="image/x-icon">
 <title>Priddy Loan System</title>
 <script>
@@ -49,16 +49,15 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
     		<?PHP
 						
 if (@$_SESSION ["AUTH_USER"] == true)
-							print '<a href="/' . strtolower ( $_SESSION ["SystemNameStr"] ) . '/login/logout.php">LOGOFF</a>';
+							print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/logout.php">LOGOFF</a>';
 						else {
 							$LoginSelectStr = '';
 							if ($CurrentRequestURLarr [2] == "login")
 								$LoginSelectStr = ' class="selected"';
-							print '<a href="/' . strtolower ( $_SESSION ["SystemNameStr"] ) . '/login/index.php"' . $LoginSelectStr . '>Staff LOGIN</a>';
+							print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/login.php"' . $LoginSelectStr . '>Staff LOGIN</a>';
 						}
 						?>
-			<a href="/<?=strtolower($_SESSION["SystemNameStr"])?>"
-		<? if ($CurrentRequestURLarr[2]=="") print ' class="selected"'?>></a>
+		
 
 </div>
 </div>
@@ -74,32 +73,32 @@ if (@$_SESSION ["AUTH_USER"] == true)
 				style="width: 98%" readonly/></td>
 		</tr>
 		<tr>
-			<td><label for='Last Name'><b>User ID:</b></label></td>
+			<td><label for='Last Name'><b>Patron ID:</b></label></td>
 			<td><input type='text' name='alephid' id='alephid' 	value="<?php echo $userRow["Aleph_ID"] ?>" maxlength="50" required placeHolder = "Get System ID from Aleph"
 				style="width: 98%" /></td>
 		</tr>
 		<tr>
 			<td><label for='Last Name'><b>First Name:</b></label></td>
 			<td><input type='text' name='fname' id='fname'
-				value=<?php echo $userRow["First_Name"] ?> maxlength="50"
+				value= "<?php echo $userRow["First_Name"] ?>" maxlength="50"
 				style="width: 98%" readonly/></td>
 		</tr>
 		<tr>
 			<td><label for='barcode'><b>Last Name:</b></label></td>
 			<td><input type='text' name='lname' id='lname'
-				value=<?php echo $userRow["Last_Name"] ?> maxlength="50"
+				value= "<?php echo $userRow["Last_Name"] ?>" maxlength="50"
 				style="width: 98%" readonly/></td>
 		</tr>
 		<tr>
 			<td><label for='Email'><b>Email:</b></label></td>
 			<td><input type='text' name='email' id='email'
-				value=<?php echo $userRow["Email"] ?> maxlength="50"
+				value= "<?php echo $userRow["Email"] ?>" maxlength="50"
 				style="width: 98%" readonly/></td>
 		</tr>
 		<tr>
 			<td><label for='Email'><b>Phone Number:</b></label></td>
 			<td><input type='text' name='pno' id='pno'
-				value=<?php echo $userRow["Phone_Number"] ?> maxlength="50"
+				value= "<?php echo $userRow["Phone_Number"] ?>" maxlength="50"
 				style="width: 98%" readonly/></td>
 		</tr>
 		<tr>
@@ -145,7 +144,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 			<td><select name="department">
 				<?php
 				// Build the query
-				$ins = "SELECT * FROM Programs_Department ORDER BY Department_Name ASC";
+				$ins = "SELECT * FROM programs_department ORDER BY Department_Name ASC";
 				$insresult = mysql_query ( $ins );
 				while ( $progrow = mysql_fetch_array ( $insresult, MYSQL_ASSOC ) ) {
 					if ($userRow ['Programs_Department_ID'] == $progrow ['Programs_Department_ID']) {
@@ -169,7 +168,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 			<td><select name="itemtype">
 				<?php
 				// Build the query
-				$itemtype = "SELECT * FROM Item_Type ORDER BY Description ASC";
+				$itemtype = "SELECT * FROM item_type ORDER BY Description ASC";
 				$itemresult = mysql_query ( $itemtype );
 				while ( $typerow = mysql_fetch_array ( $itemresult, MYSQL_ASSOC ) ) {
 					if ($userRow ['Item_Type_ID'] == $typerow ['Item_Type_ID']) {

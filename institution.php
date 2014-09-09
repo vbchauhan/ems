@@ -8,9 +8,9 @@ top();
 <head>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
 // Update database with the institution information
@@ -112,11 +112,10 @@ function editInformation(institutionid,institution)
 </head>
 <body>
 
+<H1><strong>Add/Change Institution Information</strong></H1>
 
-
-<div id="banner" style="width:90%;float:left">Add/Change Institution Information</div>
 <?php 
-$query = "Select * from Institutions";
+$query = "Select * from institutions";
 $result = mysql_query($query);
 $nums = mysql_num_rows($result);
 ?>

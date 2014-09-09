@@ -31,6 +31,7 @@ if(isset($_GET["barcode"]) ){
 <link rel="shortcut icon" href="/<?php echo strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <title>Priddy Loan System</title>
+
 <script>
 
 function getUserInfo(){
@@ -102,10 +103,10 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 
 </script>
 </head>
-<div id="banner" "style:width="90%"";>EQUIPMENT MANAGEMENT SYSTEM</div>
+<div id="banner" style="width:90%;margin:0px;text-align:center";>EQUIPMENT MANAGEMENT SYSTEM</div>
 	<div id="topnavi">
     		<?PHP if (@$_SESSION["AUTH_USER"]==true) 
-						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/login/logout.php">LOGOFF</a>';
+						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/logout.php">LOGOFF</a>';
 					else
 						{
 						$LoginSelectStr='';
@@ -116,12 +117,12 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
             
 	</div>	
 </div>	
-<h1>Equipment Request Form</h1>
+<h1 style = "margin-left:38%">Equipment Request Form</h1>
 <label id="NoUserFound" style = "width :100%"></label><br>
-<input type='button' name='getuserinfo' id = 'getuserinfo' onClick = "getUserInfo()" value = "Get Information"/>
-<form name="registration" action="sendRequest.php" method="post" onsubmit="return validateForm(this)">
-	<table border="1">
-		<tr>
+<input type='button' name='getuserinfo' id = 'getuserinfo' onClick = "getUserInfo()" value = "Get Information" style = "margin-left:30%"/>
+<form name="registration" action="sendRequest.php" method="post" onsubmit="return validateForm(this)" style = "margin-left:30%">
+	<table border="1" >
+		<tr class = "required">
 			<td><label for='barcode' ><b>Barcode:</b></label></td>
 			<td><input type='number' name='barcode' id='barcode' max="99999999999999" style="width:98%"/ required placeholder="Barcode Number"></td>
 			
@@ -132,21 +133,21 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				<b>Click <a target="_blank" style = "color: blue;text-decoration : underline" href = "http://shadygrove.umd.edu/library/services/find-lib-barcode">Here</a> to find your Library Barcode Number</b>
 			</td>
 		</tr>
-		<tr>
+		<tr class = "required">
 			<td><label for='fname' ><b>First Name:</b></label></td>
 			<td><input type='text' name='fname' id='fname' maxlength="50" style="width:98%" required placeholder="First Name"/></td>
 		</tr>
-		<tr>
+		<tr class = "required">
 			<td><label for='Last Name' ><b>Last Name:</b></label></td>
 			<td><input type='text' name='lname' id='lname' maxlength="50" style="width:98%"/ required placeholder="Last Name"></td>
 		</tr>
-		<tr>
+		<tr class = "required">
 			<td><label for='Email' ><b>Email:</b></label></td>
 			<td><input type='text' name='email' id='email' maxlength="50" style="width:98%"/ required placeholder="Enter a valid email address"></td>
 		</tr>
 		<tr>
 			<td><label for='phone' ><b>Phone Number:</b></label></td>
-			<td><input type='number' name='pno' id='pno' maxlength="10" style="width:98%"/ placeholder="Enter a valid phone number"></td>
+			<td><input type='number' name='pno' id='pno' maxlength="10" style="width:98%"/ placeholder="Enter 10 digit phone number"></td>
 		</tr>
 		<tr>
 			<td>
@@ -198,9 +199,9 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr class = "required">
 			<td><label for='Date needed' ><b>Date needed:</b></label></td>
-			<td><input type='date' name='request_date' id='request_date' value = "<?php echo date('Y-m-d'); ?>" maxlength="50" style="width:98%"/></td>
+			<td><input type='date' name='request_date' id='request_date' value = "<?php echo date('Y-m-d'); ?>" required maxlength="50" style="width:98%"/></td>
 		</tr>
 		<tr>
 			<td><label for='itemtype' ><b>Item Type:</b></label></td>
@@ -218,7 +219,7 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr class = "required">
 			<td><label for='No of Items:' ><b> No. of Items :</b></label></td>
 			<td><input type='number' name='items' id='items' max="25" style="width:98%"/ value = "1" required placeholder="Quantity"></td>
 		</tr>

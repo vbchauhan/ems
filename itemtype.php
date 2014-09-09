@@ -8,9 +8,9 @@ top();
 <head>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
 
@@ -25,7 +25,6 @@ function submititemtype(param)
 		url: 'update.php',
 		data: {updatetype : updatetype,Description:$("#description").val(),Item_Type_ID:$("#itemtypeid").val()},
 		success:function(data){
-			alert(data);
 			location.reload();
 		},
 	});
@@ -76,17 +75,16 @@ function additemtypeInformation()
 	
 }
 
-function editInformation(itemtypeid,department)
+function editInformation(itemtypeid,description)
 {
 	//alert('Hi');
-	console.log(department);
 	
 	$("#additemtype").html("");
 	$("#additemtype").append( '<form onSubmit = "submititemtype(1)"> '+
 			'<label style="width:30%">Item Type ID</label>'+
 			'<input type = "text" id = "itemtypeid" value = '+itemtypeid+' readonly/><br>'+
 			'<label style="width:30%">Description</label>'+
-			'<input type = "text" id = "description" value = "'+department+'" style = "width:50%" /><br>'+
+			'<input type = "text" id = "description" value = "'+description+'" style = "width:50%" /><br>'+
 			'<input type = "submit" value = "Submit" />'+
 			'</form>'
 			);
@@ -112,11 +110,10 @@ function editInformation(itemtypeid,department)
 </head>
 <body>
 
+<H1><strong>Add/Change Item Type Information</strong></H1>
 
-
-<div id="banner" style="width:90%;float:left">Add/Change Item Type Information</div>
 <?php 
-$query = "Select * from Item_Type";
+$query = "Select * from item_type";
 $result = mysql_query($query);
 $nums = mysql_num_rows($result);
 ?>

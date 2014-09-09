@@ -31,7 +31,7 @@ $id=$_GET["id"];
 		$order=$_GET["order"];
 		}
 	else{
-		$order="asc";
+		$order="DESC";
 	}
 ?>
 <head>
@@ -72,7 +72,8 @@ function comparer(index) {
 function getCellValue(row, index){ return $(row).children('td').eq(index).html() }
 </script>
 </head>
-<div id="banner" "style:width="90%"";>EQUIPMENT MANAGEMENT SYSTEM</div>
+<body style = "margin-left:10px;margin-right:10px">
+<div id="banner" style="width:90%;margin-left:0px";>EQUIPMENT MANAGEMENT SYSTEM</div>
 	<div id="topnavi">
 	<div id="topnavi">
 			<a href="/<?php echo strtolower($_SESSION["SystemNameStr"])?>"<?php if ($CurrentRequestURLarr[2]=="") print ' class="selected"'?>>Home</a>
@@ -118,7 +119,8 @@ echo '<table cellpadding="0" cellspacing="0" class="db-table"> <tr>';
 
 echo '<table id = "requestdata" align="center" cellspacing="0" cellpadding="5">
 <tr class = "BackgroundColorChange">
-	<th align="left"><a href="" class = "Textwhite"><b>User ID</b></a></th>				
+	<th align="left"><a href="" class = "Textwhite"><b>Patron ID</b></a></th>
+	<th align="left"><a href="" class = "Textwhite"><b>Request ID</b></a></th>					
 	<th align="left"><a href="" class = "Textwhite"><b>First Name</b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>Last Name</a></b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>Barcode</b></a></th>
@@ -165,6 +167,7 @@ if($userRow['Aleph_ID'] != '')
 	$bg = ($bg=='#eeeeee' ? '#ffffff' : '#eeeeee'); // Switch the background color.
 	echo '<tr bgcolor="' . $bg . '" class = "tablecontent">
 		<td align="left">' . check_user_id($userRow['Aleph_ID']) . '</td>
+		<td align="left">' . $row['Request_ID']. '</td>
 		<td align="left">' . $userRow['First_Name'] . '</td>
 		<td align="left">' . $userRow['Last_Name'] . '</td>
 		<td align="left">' . $userRow['Barcode_ID'] . '</td>
@@ -192,6 +195,7 @@ echo '</table>';
 	exit;
 	}*/
 ?>
+</body>
 <script language="javascript" type="text/javascript">
 function confirmdelete(){
 var c=confirm("Are you sure? Once Cancelled the action cannot be undone!");

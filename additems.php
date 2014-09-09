@@ -8,9 +8,9 @@ top();
 <head>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/main.css" rel="stylesheet" media="screen">
-<link href="/<?=strtolower($_SESSION["SystemNameStr"])?>/css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" href="/<?=strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
+<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Priddy Loan System</title>
 <script language="javascript" type="text/javascript">
 // Submit the item and store the information in database
@@ -26,7 +26,7 @@ function submititem(param)
 		data: {updatetype : updatetype,Description:$("#description").val(),Serial_number:$("#serial").val(),Barcode:$("#barcode").val(),Item_Type_ID:$("#typedesc").val()},
 		success:function(data){
 			location.reload();
-			alert(data);
+
 		},
 	});
 }
@@ -66,7 +66,7 @@ function addItemInformation()
 			'</form>'
 			);
 	<?php
-	$descQuery = 'Select * from Item_Type';
+	$descQuery = 'Select * from item_type';
 	$result = mysql_query($descQuery);
 	while($row = mysql_fetch_array($result)){
 	echo '$("#typedesc").append("<option value='.$row['Item_Type_ID'].'>'.$row['Description'].'</option>")';
@@ -105,7 +105,7 @@ function editInformation(barcode,serial,description,type)
 			'</form>'
 			);
 	<?php
-	$descQuery = 'Select * from Item_Type';
+	$descQuery = 'Select * from item_type';
 	$result = mysql_query($descQuery);
 	while($row = mysql_fetch_array($result)){
 	echo '$("#typedesc").append("<option value='.$row['Item_Type_ID'].'>'.$row['Description'].'</option>")';
@@ -134,10 +134,9 @@ function editInformation(barcode,serial,description,type)
 <body>
 
 
-
-<div id="banner" style="width:90%;float:left">Add/Change Item Information</div>
+<H1><strong>Add/Change Item Information</strong></H1>
 <?php 
-$query = "Select * from Items";
+$query = "Select * from items";
 $result = mysql_query($query);
 // Populate the item information
 $nums = mysql_num_rows($result);
