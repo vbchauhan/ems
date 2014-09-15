@@ -31,7 +31,7 @@ $(document).ready(function() {
 
 function getDetails(data){
 
-	console.log(data);
+
 var rowData = data.split('||');
 console.log(rowData);
                            	
@@ -174,8 +174,8 @@ if(isset($_GET["data"]))
 		$itemRow = mysql_fetch_array($itemResult, MYSQL_ASSOC);
 		$data = $data.$itemRow['Description'].','.$itemRow['Barcode'].','.$row['Loan_Date'].','.$row['Return_Date'].','.$row['Due_Date'].','.$row['Request_accept_date'].'||';
 		}
-		echo $data;
-		echo '<script type="text/javascript">getDetails('.$data.');</script>';
+		//echo $data;
+		echo '<script type="text/javascript">getDetails("'.$data.'");</script>';
 	}
 
 ?>

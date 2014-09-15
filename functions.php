@@ -564,7 +564,6 @@ function refresh(){
 			$alephResult = mysql_query('Select * from aleph_data where Aleph_ID ="'.$userRow['Aleph_ID'].'"');
 			while ($alephRow = mysql_fetch_array($alephResult, MYSQL_ASSOC))
 			{
-				echo print_r($alephRow);
 			if ($alephRow['Aleph_ID'] && $row['Request_Date'] == $alephRow['Loan'])
 			{
 				$query_item = "SELECT * FROM items where barcode =".$alephRow['Barcode'];

@@ -31,7 +31,14 @@ if(isset($_GET["barcode"]) ){
 <link rel="shortcut icon" href="/<?php echo strtolower($_SESSION["SystemNameStr"])?>/favicon.ico" type="image/x-icon">
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <title>Priddy Loan System</title>
-
+<style type="text/css">
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+</style>
 <script>
 
 function getUserInfo(){
@@ -119,7 +126,9 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 </div>	
 <h1 style = "margin-left:38%">Equipment Request Form</h1>
 <label id="NoUserFound" style = "width :100%"></label><br>
-<input type='button' name='getuserinfo' id = 'getuserinfo' onClick = "getUserInfo()" value = "Get Information" style = "margin-left:30%"/>
+<input type='button' name='getuserinfo' id = 'getuserinfo' onClick = "getUserInfo()" value = "Autofill" style = "margin-left:30%"/>
+<label style = "margin-left:30%;width:100%">Enter barcode and click Autofill if already requested before.</label>
+
 <form name="registration" action="sendRequest.php" method="post" onsubmit="return validateForm(this)" style = "margin-left:30%">
 	<table border="1" >
 		<tr class = "required">
@@ -220,7 +229,7 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 			</td>
 		</tr>
 		<tr class = "required">
-			<td><label for='No of Items:' ><b> No. of Items :</b></label></td>
+			<td><label for='No of Items:' ><b> No. of Items:</b></label></td>
 			<td><input type='number' name='items' id='items' max="25" style="width:98%"/ value = "1" required placeholder="Quantity"></td>
 		</tr>
 		<tr>
