@@ -181,7 +181,7 @@ if($userRow['Aleph_ID'] != '')
 		<td align="left">' . $row['No_of_items'] . '</td>
 		<td align="left"><a href="editRequest.php?id=' . $row['Request_ID'] . '" > <img src="images/edit-icon.png" width="28" height="28"></a></td>
 		<!--<td align="left"><a href="test.php" onclick = "compareitems()">Reserve</a></td>-->
-		<td align="left"><a href="view_requests.php?id=' . $row['Request_ID'] . '&cancel=1" onclick="confirmdelete()"><img src="images/delete-icon.png" width="28" height="28"></a></td>
+		<td align="left"><a><img src="images/delete-icon.png" onclick = confirmdelete('.$row['Request_ID'].') width="28" height="28"></a></td>
 		</tr>
 	';
 }
@@ -197,12 +197,12 @@ echo '</table>';
 ?>
 </body>
 <script language="javascript" type="text/javascript">
-function confirmdelete(){
+function confirmdelete(requestid){
+
 var c=confirm("Are you sure? Once Cancelled the action cannot be undone!");
-if(c==false){
-	window.location="view_requests.php?";
+if(c==true){
+	window.location="view_requests.php?id="+requestid+"&cancel=1";
 	}
-else
-{return false;}
+
 }
 </script>

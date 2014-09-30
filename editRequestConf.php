@@ -54,7 +54,7 @@ if (!$confirm && !$confirm1)
 else 
 	{
 	echo " <h1>The User request was successfully updated in the database</h1>";
-	echo $alephid.' '.$userid;
+
 	}
 
 

@@ -495,7 +495,7 @@ function download_aleph_data()
 function download_availableitems_data()
 {
 	$file = new SimpleXMLElement(file_get_contents("http://catalog.umd.edu/cgi-bin/cpsgequip"));
-	//echo $file->table;
+	echo $file->table;
 	$summary = $file -> body -> table[1]->tr;
 	$data = array();
 	$line = '';

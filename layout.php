@@ -22,11 +22,13 @@ function top()
     		<?php 
     			if (@$_SESSION["AUTH_USER"]==true) {
     				print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/">Home</a>';
+    				print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/index.php?refresh=1">Refresh</a>';
 						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/view_requests.php">View Requests</a>';
 						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/reserved.php">View Reservations</a>';
 						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/generate_report.php">Reports</a>';
 						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/admin.php">Admin</a>';
 						print '<a href="/'.strtolower($_SESSION["SystemNameStr"]).'/logout.php">LOGOFF</a>';
+						
 						}
 					else
 						{

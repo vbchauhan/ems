@@ -18,7 +18,12 @@ $userRow = mysql_fetch_array ( $userResult, MYSQL_ASSOC );
 	href="favicon.ico"
 	type="image/x-icon">
 <title>Priddy Loan System</title>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script>
+
+$(document).ready(function(){
+	$("#row_department").hide();
+});
 function validateForm()
 {
 var a=document.forms["registration"]["fname"].value;
@@ -67,7 +72,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 	onsubmit="return validateForm(this)">
 	<table border="1">
 		<tr>
-			<td><label for='fname'><b>Barcode:</b></label></td>
+			<td><label for='fname'><b>Patron Barcode:</b></label></td>
 			<td><input type='text' name='barcode' id='barcode'
 				value=<?php echo $userRow["Barcode_ID"] ?> maxlength="50"
 				style="width: 98%" readonly/></td>
@@ -81,36 +86,41 @@ if (@$_SESSION ["AUTH_USER"] == true)
 			<td><label for='Last Name'><b>First Name:</b></label></td>
 			<td><input type='text' name='fname' id='fname'
 				value= "<?php echo $userRow["First_Name"] ?>" maxlength="50"
-				style="width: 98%" readonly/></td>
+				style="width: 98%" /></td>
 		</tr>
 		<tr>
 			<td><label for='barcode'><b>Last Name:</b></label></td>
 			<td><input type='text' name='lname' id='lname'
 				value= "<?php echo $userRow["Last_Name"] ?>" maxlength="50"
-				style="width: 98%" readonly/></td>
+				style="width: 98%" /></td>
 		</tr>
 		<tr>
 			<td><label for='Email'><b>Email:</b></label></td>
 			<td><input type='text' name='email' id='email'
 				value= "<?php echo $userRow["Email"] ?>" maxlength="50"
-				style="width: 98%" readonly/></td>
+				style="width: 98%" /></td>
 		</tr>
 		<tr>
 			<td><label for='Email'><b>Phone Number:</b></label></td>
 			<td><input type='text' name='pno' id='pno'
 				value= "<?php echo $userRow["Phone_Number"] ?>" maxlength="50"
-				style="width: 98%" readonly/></td>
+				style="width: 98%" /></td>
 		</tr>
 		<tr>
+		<?php 
+		// Build the query
+		$utypequery = "SELECT * FROM user_types ORDER BY Description ASC";
+		$utyperesult = mysql_query ( $utypequery );
+	
+		?>
 			<td><label for='User Type:'><b> User Type:</b></label></td>
 			<td><select name="utype" style="width: 99%">
 				<?php
-				// Build the query
-				$utypequery = "SELECT * FROM user_types ORDER BY Description ASC";
-				$utyperesult = mysql_query ( $utypequery );
+
 				while ( $utyperow = mysql_fetch_array ( $utyperesult, MYSQL_ASSOC ) ) {
+					
 					if ($userRow ['Type_ID'] == $utyperow ['Type_ID']) {
-						echo '<option value="' . $utyperow ['Description'] . '" disabled="disabled">' . $utyperow ['Description'] . '</option>';
+						echo '<option value="' . $utyperow ['Description'] . '" selected="selected">' . $utyperow ['Description'] . '</option>';
 					} else {
 						echo '<option value="' . $utyperow ['Description'] . '">' . $utyperow ['Description'];
 					}
@@ -127,7 +137,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 				$insresult = mysql_query ( $ins );
 				while ( $insrow = mysql_fetch_array ( $insresult, MYSQL_ASSOC ) ) {
 					if ($userRow ['Institutions_ID'] == $insrow ['Institutions_ID']) {
-						echo '<option value="' . $insrow ['Name'] . '" disabled="disabled">' . $insrow ['Name'] . '</option>';
+						echo '<option value="' . $insrow ['Name'] . '" selected="selected">' . $insrow ['Name'] . '</option>';
 					} else {
 						echo '<option value="' . $insrow ['Name'] . '">' . $insrow ['Name'];
 					}
@@ -138,7 +148,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 		<tr>
 		
 		
-		<tr>
+		<tr id = "row_department">
 
 			<td><label for='department'><b>Department:</b></label></td>
 			<td><select name="department">
@@ -148,7 +158,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 				$insresult = mysql_query ( $ins );
 				while ( $progrow = mysql_fetch_array ( $insresult, MYSQL_ASSOC ) ) {
 					if ($userRow ['Programs_Department_ID'] == $progrow ['Programs_Department_ID']) {
-						echo '<option value="' . $progrow ['Department_Name'] . '" disabled="disabled">' . $progrow ['Department_Name'] . '</option>';
+						echo '<option value="' . $progrow ['Department_Name'] . '" selected="selected">' . $progrow ['Department_Name'] . '</option>';
 					} else {
 						echo '<option value="' . $progrow ['Department_Name'] . '">' . $progrow ['Department_Name'];
 					}
@@ -163,7 +173,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 				value=<?php echo $row["Request_Date"] ?> maxlength="50"
 				style="width: 98%" /></td>
 		</tr>
-		
+		<tr>
 			<td><label for='itemtype'><b>Item Type:</b></label></td>
 			<td><select name="itemtype">
 				<?php
@@ -171,7 +181,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 				$itemtype = "SELECT * FROM item_type ORDER BY Description ASC";
 				$itemresult = mysql_query ( $itemtype );
 				while ( $typerow = mysql_fetch_array ( $itemresult, MYSQL_ASSOC ) ) {
-					if ($userRow ['Item_Type_ID'] == $typerow ['Item_Type_ID']) {
+					if ($row ['Item_Type_ID'] == $typerow ['Item_Type_ID']) {
 						echo '<option value="' . $typerow ['Description'] . '" selected="selected">' . $typerow ['Description'] . '</option>';
 					} else {
 						echo '<option value="' . $typerow ['Description'] . '">' . $typerow ['Description'];

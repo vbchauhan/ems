@@ -38,9 +38,14 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+.requesttable .label {
+width:46%;
+}
 </style>
 <script>
-
+$(document).ready(function (){
+	$("#row_program").hide();
+	});
 function getUserInfo(){
 	var barcode = document.getElementById('barcode').value;
 	if( barcode == null || barcode == "")
@@ -127,38 +132,54 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 <h1 style = "margin-left:38%">Equipment Request Form</h1>
 <label id="NoUserFound" style = "width :100%"></label><br>
 <input type='button' name='getuserinfo' id = 'getuserinfo' onClick = "getUserInfo()" value = "Autofill" style = "margin-left:30%"/>
-<label style = "margin-left:30%;width:100%">Enter barcode and click Autofill if already requested before.</label>
+<label style = "margin-left:30%;width:100%;font-weight:normal">Enter barcode and click "Autofill" if you've requested an equipment before</label>
 
 <form name="registration" action="sendRequest.php" method="post" onsubmit="return validateForm(this)" style = "margin-left:30%">
-	<table border="1" >
-		<tr class = "required">
-			<td><label for='barcode' ><b>Barcode:</b></label></td>
+	<table border="1" class = "requesttable">
+		<tr id = "row_item_type">
+			<td><label for='itemtype' ><b>Item Type:</b></label></td>
+			<td>	
+				<select name="itemtype" id="itemtype">
+				<?php 
+	// Build the query
+				$query = "SELECT description FROM item_type ORDER BY description ASC";
+				$result = mysql_query ($query);
+				while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
+				{
+					if($row['description'] =="iPad")
+					echo '<option value="'.$row['description'].'" >'.$row['description'].'</option>';
+				}
+				?>
+				</select>
+			</td>
+		</tr>
+		<tr class = "required" id = "row_barcode">
+			<td class = "label"><label for='barcode' style = "width:100%"><b>Patron Barcode:</b></label></td>
 			<td><input type='number' name='barcode' id='barcode' max="99999999999999" style="width:98%"/ required placeholder="Barcode Number"></td>
 			
 		</tr>
-		<tr>
-		
-			<td colspan="2" style ="font-size :0.8em">
-				<b>Click <a target="_blank" style = "color: blue;text-decoration : underline" href = "http://shadygrove.umd.edu/library/services/find-lib-barcode">Here</a> to find your Library Barcode Number</b>
+		<tr id = "row_find_barcode">
+				<td colspan="2" style ="font-size :0.8em">
+				<b>Click <a target="_blank" style = "color: blue;text-decoration : underline" href = "http://shadygrove.umd.edu/library/services/find-lib-barcode">here</a> to find your library barcode number</b>
 			</td>
 		</tr>
-		<tr class = "required">
+		<tr class = "required" id = "row_first_name">
 			<td><label for='fname' ><b>First Name:</b></label></td>
 			<td><input type='text' name='fname' id='fname' maxlength="50" style="width:98%" required placeholder="First Name"/></td>
 		</tr>
-		<tr class = "required">
+		<tr class = "required" id = "row_last_name">
 			<td><label for='Last Name' ><b>Last Name:</b></label></td>
 			<td><input type='text' name='lname' id='lname' maxlength="50" style="width:98%"/ required placeholder="Last Name"></td>
 		</tr>
-		<tr class = "required">
+		<tr class = "required" id = "row_email">
 			<td><label for='Email' ><b>Email:</b></label></td>
 			<td><input type='text' name='email' id='email' maxlength="50" style="width:98%"/ required placeholder="Enter a valid email address"></td>
 		</tr>
-		<tr>
+		<tr id = "row_phone">
 			<td><label for='phone' ><b>Phone Number:</b></label></td>
 			<td><input type='number' name='pno' id='pno' maxlength="10" style="width:98%"/ placeholder="Enter 10 digit phone number"></td>
 		</tr>
-		<tr>
+		<tr id = "row_user_type">
 			<td>
 				<label for='User Type:' ><b> User Type:</b></label></td>
 			<td>
@@ -175,7 +196,7 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr id = "row_institution">
 			<td><label for='Institution' ><b>Institution:</b></label></td>
 			<td>	
 				<select name="institution" id = "institution">
@@ -191,8 +212,7 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				</select>
 			</td>
 		</tr>
-		<tr>
-		<tr>
+		<tr id = "row_program">
 			<td><label for='programname' ><b>Program:</b></label></td>
 			<td>	
 				<select name="programname" id = "programname">
@@ -208,37 +228,28 @@ if (a==null || a=="" || b==null || b=="" || c==null || c=="" || d==null || d==""
 				</select>
 			</td>
 		</tr>
-		<tr class = "required">
+		<tr class = "required" id = "row_date">
 			<td><label for='Date needed' ><b>Date needed:</b></label></td>
 			<td><input type='date' name='request_date' id='request_date' value = "<?php echo date('Y-m-d'); ?>" required maxlength="50" style="width:98%"/></td>
 		</tr>
-		<tr>
-			<td><label for='itemtype' ><b>Item Type:</b></label></td>
-			<td>	
-				<select name="itemtype">
-				<?php 
-	// Build the query
-				$query = "SELECT description FROM item_type ORDER BY description ASC";
-				$result = mysql_query ($query);
-				while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
-				{
-				echo '<option value="'.$row['description'].'" selected="selected">'.$row['description'].'</option>';
-				}
-				?>
-				</select>
-			</td>
-		</tr>
-		<tr class = "required">
-			<td><label for='No of Items:' ><b> No. of Items:</b></label></td>
+		<tr class = "required" id = "row_no_needed">
+			<td><label for='No of Items:' ><b> No. Needed:</b></label><br style = "line-height: 1.6"><b><span style = "font-size:11">(Subject to availability)</span></b></td>
 			<td><input type='number' name='items' id='items' max="25" style="width:98%"/ value = "1" required placeholder="Quantity"></td>
 		</tr>
-		<tr>
+		<tr id = "row_terms_ipad">
 		
-			<td colspan="2" style ="font-size :0.8em">
-				<input type='checkbox' id ="agreecheck" required/><b>I agree to the Equipment Loan <a style = "color: blue;text-decoration : underline" href = "termsandcondition.php">Terms and Conditions</b></a>
+			<td colspan="2" style ="font-size :0.7em">
+				- Students can request only one iPad at a time<br>
+				- Faculty requests of multiple iPads should be made atleast one week in advance
 			</td>
 		</tr>
-		<tr>
+		<tr id = "row_terms">
+		
+			<td colspan="2" style ="font-size :0.8em">
+				<input type='checkbox' id ="agreecheck" required/><b>I agree to the equipment loan <a style = "color: blue;text-decoration : underline" href = "termsandcondition.php">terms and conditions</b></a>
+			</td>
+		</tr>
+		<tr id = "row_submit">
 			<td colspan="2" align="center">
 				<input type='submit' value='Submit Request'/>
 			</td>
