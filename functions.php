@@ -558,7 +558,6 @@ function refresh(){
 		$query_users = "SELECT * FROM users where Users_ID =".$row['Users_ID'];
 		$userResult = mysql_query($query_users); // Run the query.
 		$userRow = mysql_fetch_array($userResult, MYSQL_ASSOC);
-	
 		if($userRow['Aleph_ID'] != '')
 		{
 			$alephResult = mysql_query('Select * from aleph_data where Aleph_ID ="'.$userRow['Aleph_ID'].'"');

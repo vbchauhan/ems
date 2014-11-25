@@ -111,7 +111,7 @@ console.log(data);
 if ($_GET['refresh'] == 1)
 	refresh();
 
-$query = "select Loan_Date, count(Items_ID) as Total_Items, Request_ID, Users_ID from loans where Loan_Date >= now()-interval 3 month group by Request_ID";
+$query = "select Loan_Date, count(Items_ID) as Total_Items, Request_ID, Users_ID from loans where Loan_Date >= now()-interval 3 month group by Request_ID Order by Loan_Date DESC";
 $result = mysql_query($query); // Run the query.
 echo '<table cellpadding="0" cellspacing="0" class="db-table"> <tr>';
 
@@ -124,9 +124,8 @@ echo '<table align="center" cellspacing="0" cellpadding="5">
 	<th align="left"><b>Phone</b></th>
 	<th align="left"><b>User Type</b></th>
 	<th align="left"><b>Institutions</b></th>
-	<th align="left"><b>Department</b></th>
 	<th align="left"><b>Request Date</b></th>
-	<th align="left"><b>#iPad_Requested</b></th>
+	<th align="left"><b>iPad/Laptop Requested</b></th>
 	<th align="left"><b>Action</b></th>
 	
 </tr>';
@@ -147,7 +146,6 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 		<td align="left" style = "text-align:center">' . $userRow['Phone_Number'] . '</td>
 		<td align="left" style = "text-align:center">' . get_user_type_desc($userRow['Type_ID']). '</td>
 		<td align="left" style = "text-align:center">' . get_institution_name($userRow['Institutions_ID']) . '</td>
-		<td align="left">' . get_programs_name($userRow['Programs_Department_ID']) . '</td>
 		<td align="left" style = "text-align:center">' . $row['Loan_Date'] . '</td>
 		<td align="left" style = "text-align:center"><b>' . $row['Total_Items'] . '</b></td>
 		<td align="left"><a href="reserved.php?data=' . $row['Request_ID'] . '">Details</td>

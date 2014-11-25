@@ -44,7 +44,7 @@ if(isset($_POST["userid"])){
 $sql="update request set Request_ID='$request',No_of_Items='$items',Request_Date='$request_date',Users_ID='$userid',Item_Type_ID='".get_item_type_id($itemtype)."' 
 where Request_ID='$request';";
 $confirm=mysql_query($sql);
-$usersql = "update users set First_name='$fname',Last_name='$lname',Phone_Number='$pno',Email ='$email', Barcode_ID ='$barcode', Aleph_ID ='$alephid' where Users_ID ='$userid';";
+$usersql = "update users set First_name='$fname',Last_name='$lname',Phone_Number='$pno',Email ='$email', Barcode_ID ='$barcode', Aleph_ID ='$alephid', Type_ID = '".get_user_type_id($utype)."', Institutions_ID = '".get_institution_id($institution)."' where Users_ID ='$userid';";
 $confirm1 = mysql_query($usersql);
 //This code will print the confirmation that the record has been updated in the database
 if (!$confirm && !$confirm1)

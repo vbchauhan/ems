@@ -95,7 +95,7 @@ elseif ($_GET['updatetype']=='delinstitution')
 
 if($_GET['updatetype'] == 'updateitemtype')
 {
-	$query = "Update item_type SET Description ='".$_GET['Description']."' where Item_Type_ID ='".$_GET['Item_Type_ID']."';";
+	$query = "Update item_type SET Description ='".$_GET['Description']."' where Item_Type_ID =".$_GET['Item_Type_ID'].";";
 	$result = mysql_query($query);
 	if($result)
 		echo 'Record update successfully';

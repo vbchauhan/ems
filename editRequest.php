@@ -75,7 +75,7 @@ if (@$_SESSION ["AUTH_USER"] == true)
 			<td><label for='fname'><b>Patron Barcode:</b></label></td>
 			<td><input type='text' name='barcode' id='barcode'
 				value=<?php echo $userRow["Barcode_ID"] ?> maxlength="50"
-				style="width: 98%" readonly/></td>
+				style="width: 98%" /></td>
 		</tr>
 		<tr>
 			<td><label for='Last Name'><b>Patron ID:</b></label></td>

@@ -69,7 +69,7 @@ function addItemInformation()
 	$descQuery = 'Select * from item_type';
 	$result = mysql_query($descQuery);
 	while($row = mysql_fetch_array($result)){
-	echo '$("#typedesc").append("<option value='.$row['Item_Type_ID'].'>'.$row['Description'].'</option>")';
+	echo '$("#typedesc").append("<option value='.$row['Item_Type_ID'].'>'.$row['Description'].'</option>");';
 	} 
 	?>
 	
@@ -92,7 +92,7 @@ function addItemInformation()
 function editInformation(barcode,serial,description,type)
 {
 	
-	console.log(description);
+	
 	
 	$("#additem").html("");
 	$("#additem").append( '<form onSubmit = "submititem(1)"> '+
@@ -108,7 +108,7 @@ function editInformation(barcode,serial,description,type)
 	$descQuery = 'Select * from item_type';
 	$result = mysql_query($descQuery);
 	while($row = mysql_fetch_array($result)){
-	echo '$("#typedesc").append("<option value='.$row['Item_Type_ID'].'>'.$row['Description'].'</option>")';
+		echo '$("#typedesc").append("<option value='.$row['Item_Type_ID'].'>'.$row['Description'].'</option>");';
 	} 
 	?>
 	

@@ -97,7 +97,7 @@ function getCellValue(row, index){ return $(row).children('td').eq(index).html()
 $image=$_SESSION["SystemNameStr"]."/css/images/delete-icon.png";
 ?>
 <div>
-	<H1> iPad Requests </H1>
+	<H1> Equipment Requests </H1>
 	<div style = "float:right">
 	<label>Search</label>
 	<input type = "search" id = "requestsearch" />
@@ -128,7 +128,6 @@ echo '<table id = "requestdata" align="center" cellspacing="0" cellpadding="5">
 	<th align="left"><a href="" class = "Textwhite"><b>Phone</b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>User Type</b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>Institutions</b></a></th>
-	<th align="left"><a href="" class = "Textwhite"><b>Department</b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>Request Date</b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>Item Type Requested</b></a></th>
 	<th align="left"><a href="" class = "Textwhite"><b>No Of Items</b></a></th>
@@ -149,6 +148,7 @@ $userRow = mysql_fetch_array($userResult, MYSQL_ASSOC);
 
 if($userRow['Aleph_ID'] != '')
 {
+	
 	$alephResult = mysql_query('Select * from aleph_data where Aleph_ID ="'.$userRow['Aleph_ID'].'"');
 	$alephRow = mysql_fetch_array($alephResult, MYSQL_ASSOC);
 	if ($alephRow['Aleph_ID'] && $row['Request_Date'] == $alephRow['Loan'])
@@ -156,6 +156,7 @@ if($userRow['Aleph_ID'] != '')
 		$query_item = "SELECT * FROM items where barcode =".$alephRow['Barcode'];
 		$itemResult = mysql_query($query_item); // Run the query.
 		$itemRow = mysql_fetch_array($itemResult, MYSQL_ASSOC);
+		echo $alephRow['Barcode'];
 		$queryUpdate = "Insert into loans (Loan_Date , Return_Date , Due_Date , Request_accept_date , Booking_date_from , Booking_date_to , Request_ID , Items_ID , Users_ID )	values ('".date('Y-m-d',strtotime($alephRow['Loan']))."','".date('Y-m-d',strtotime($alephRow['Due']))."','".date('Y-m-d',strtotime($alephRow['Due']))."','".$row['Request_Date']."','".date('Y-m-d',strtotime($alephRow['Booking_date_from']))."','".date('Y-m-d',strtotime($alephRow['Booking_date_to']))."','".$row['Request_ID']."','".$itemRow['Items_ID']."','".$userRow['Users_ID']."');";
 		mysql_query($queryUpdate);
 		//echo "Success";
@@ -175,7 +176,6 @@ if($userRow['Aleph_ID'] != '')
 		<td align="left">' . $userRow['Phone_Number'] . '</td>
 		<td align="left">' . get_user_type_desc($userRow['Type_ID']) . '</td>
 		<td align="left">' . get_institution_name($userRow['Institutions_ID']) . '</td>
-		<td align="left">' . get_programs_name($userRow['Programs_Department_ID']). '</td>
 		<td align="left">' . $row['Request_Date']. '</td>
 		<td align="left">' . get_item_type_desc($row['Item_Type_ID']) . '</td>
 		<td align="left">' . $row['No_of_items'] . '</td>

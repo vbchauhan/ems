@@ -118,10 +118,17 @@ else
 	if($itemtype == "iPad")
 	{
 	echo '<h1>Your request has been successfully sent to the library staff.</h1><br><br>
-	You will receive an email when your equipment is available
+	You will receive an email when your equipment is available.
 	
 	Thank you for using the equipment request System';
-	
+	}
+	else 
+	{
+		echo '<h1>Thank you for submiting the request.</h1>';
+	}
+	if($request_date > date('Y-m-d'))
+	{
+
 	$to = $email;
 	$subject = 'Priddy Circ - Equipment Request Details';
 	 
@@ -133,6 +140,7 @@ else
 	Equipment : '.$itemtype.'
 	No of Equipment Requested: '.$items.'
 	Patron Barcode : '.$barcode.'
+	Request date : '.$request_date.'
 		
 	Thank You, 
 	Priddy Library
@@ -144,7 +152,7 @@ else
 	
 	
 	// Emailing Request Information to Madhu
-	$to = 'madhus@umd.edu,priddyreserves@umd.edu,vchauhan@umd.edu';
+	$to = 'madhus@umd.edu,staceyg@umd.edu,vchauhan@umd.edu';
 	$subject = 'New iPad Request';
 	$body = '
 	A new equipment request has been made by '.$fname.' '.$lname.'[Email: '.$email.']. The request details are as follows:
@@ -154,13 +162,11 @@ else
 	Equipment : '.$itemtype.'
 	No of Equipment Requested : '.$items.'
 	Patron Barcode : '.$barcode.'
+	Request date : '.$request_date.'
 	
 ';
 	mail($to, $subject, $body, $from);
 	}
-	else 
-	{
-		echo '<h1>Thank you for submiting the request.</h1>';
-	}
+
 	}
 ?>
