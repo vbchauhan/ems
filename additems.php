@@ -156,6 +156,7 @@ $nums = mysql_num_rows($result);
 			<TD WIDTH="100" class="tableheading" ALIGN="center"><strong>&nbsp;DELETE&nbsp;</strong></TD>					
 		</TR>
 		<?php
+		// populate table
 			for($i = 1; $i<=$nums;$i++)
 			{
 				

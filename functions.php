@@ -464,6 +464,7 @@ function download_aleph_data()
 		$line['Institution'] = $items[$i]->td[9];
 		$line['Bk-start'] = $items[$i]->td[10];
 		$line['Bk-end'] = $items[$i]->td[11];
+		$line['Bk-id'] = $items[$i]->td[12];
 		//fwrite($file,"\n");
 		array_push($data,$line);
 		$line = '';

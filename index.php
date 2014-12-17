@@ -144,7 +144,7 @@ else
   </tr>
   <tr>
     <td height="67"><div>
-      <div align="right"><a href="availability.php"><img src="images/availability.png" width="64" height="64" />      </a></div>
+      <div align="right"><a href="availability.php"><img src="images/ipad-cart2.jpg" width="64" height="64" />      </a></div>
     </div></td>
     <td height="67"><div align="left"><a href="availability.php"><strong style="color:#564b47">Check availability</strong></a></div></td>
     <td><div align="right"><a href="request.php"><img src="images/ipad.png" width="64" height="64" /></a></div></td>
